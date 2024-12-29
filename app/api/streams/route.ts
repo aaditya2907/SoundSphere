@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
         //Fetching video metadata
         const YtAPIres = await youtubesearchapi.GetVideoDetails(extractedId);
         const thumbnails = YtAPIres.thumbnail.thumbnails;
-        const title = JSON.stringify(YtAPIres.title)
+        const title: string = JSON.stringify(YtAPIres.title)
         thumbnails.sort((a: { width: number }, b: { width: number }) => a.width < b.width ? -1 : 1)
 
         const user = await prisma.user.findFirst({
