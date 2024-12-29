@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import prisma from "@/app/lib/db";
 
 const handler = NextAuth({
     providers: [
