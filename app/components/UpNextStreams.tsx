@@ -1,3 +1,4 @@
+import Image from "next/image";
 
 interface Stream {
     id: string;
@@ -37,7 +38,7 @@ export default function UpnextStreams({ streams, setStreams }: Props) {
                     <li key={stream.id} className="mb-4" >
                         <div className="bg-gray-200 p-4 rounded flex justify-between">
                             <div>
-                                <img src={stream.smallImg} alt={stream.title} className="" />
+                                <Image src={stream.smallImg} alt={stream.title} className="" />
                             </div>
                             <div className="mx-3">
                                 <h2 className="mx-0 text-xl font-bold">

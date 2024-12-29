@@ -11,11 +11,10 @@ interface Stream {
 }
 
 interface Props {
-    streams: Stream[],
     setStreams: (streams: Stream[]) => void
 }
 
-export default function AddStream({ streams, setStreams }: Props) {
+export default function AddStream({ setStreams }: Props) {
     const [url, setUrl] = useState('');
     const [message, setMessage] = useState('');
     const session = useSession();

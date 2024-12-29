@@ -3,7 +3,8 @@ import { useEffect, useRef } from "react";
 declare global {
     interface Window {
         onYouTubeIframeAPIReady: () => void;
-        YT: any;
+        //@ts-expect-error Missing type definitions for this module
+        YT;
     }
 }
 
@@ -18,12 +19,12 @@ interface Stream {
 }
 
 interface Props {
-    streams: Stream[],
-    setStreams: (streams: Stream[]) => void
+    streams: Stream[]
 }
 
-export default function Player({ streams, setStreams }: Props) {
-    const playerRef = useRef<any>(null);
+export default function Player({ streams }: Props) {
+    //@ts-expect-error Missing type definitions for this module
+    const playerRef = useRef<YT.Player | null>(null);
     const currentStreamIndex = useRef(0);
 
     useEffect(() => {
@@ -53,7 +54,8 @@ export default function Player({ streams, setStreams }: Props) {
         }
     }, [streams]);
 
-    const onPlayerStateChange = (event: any) => {
+    //@ts-expect-error Missing type definitions for this module
+    const onPlayerStateChange = (event: YT.OnStateChangeEvent) => {
         if ((event.data === window.YT.PlayerState.ENDED) && (currentStreamIndex.current != streams.length - 1)) {
             // Play the next video when the current video ends
             currentStreamIndex.current = currentStreamIndex.current + 1;

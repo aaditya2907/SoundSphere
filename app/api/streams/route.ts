@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { RateLimiterMemory } from "rate-limiter-flexible";
 import { z } from "zod"
-//@ts-expect-error
+//@ts-expect-error Missing type definitions for this module
 import youtubeUrl from "youtube-url";
-//@ts-expect-error
+//@ts-expect-error Missing type definitions for this module
 import youtubesearchapi from "youtube-search-api"
 import prisma from "@/app/lib/db";
 
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     // Apply rate limiting
     try {
         await rateLimiter.consume(ip); // Deduct a point for the current request
-    } catch (rateLimiterRes) {
+    } catch (e) {
         return NextResponse.json({
             message: 'Rate limit exceeded. Please try again later.',
         }, {
