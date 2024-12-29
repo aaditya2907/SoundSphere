@@ -29,7 +29,6 @@ export default function AddStream({ setStreams }: Props) {
             }
         });
         const data = await response.json();
-        console.log(data)
         setStreams(data.streams);
     };
 

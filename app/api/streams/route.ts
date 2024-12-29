@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
                 status: 411
             })
         }
-
+                                        
         const extractedId = youtubeUrl.extractId(data.url)
 
         //Fetching video metadata

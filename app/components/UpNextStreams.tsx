@@ -19,7 +19,6 @@ interface Props {
 
 export default function UpnextStreams({ streams, setStreams }: Props) {
     async function deleteStream(id: string) {
-        console.log(id)
         await fetch(`api/streams?id=${id}`, {
             method: 'DELETE',
             headers: {
