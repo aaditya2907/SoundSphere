@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
         await rateLimiter.consume(ip); // Deduct a point for the current request
     } catch (e) {
         return NextResponse.json({
-            message: 'Rate limit exceeded. Please try again later.',
+            message: 'Rate limit exceeded. Please try again later.' + e,
         }, {
             status: 429,
         });

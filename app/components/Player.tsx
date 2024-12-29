@@ -37,13 +37,11 @@ export default function Player({ streams }: Props) {
         // Initialize the YouTube player
         window.onYouTubeIframeAPIReady = () => {
             playerRef.current = new window.YT.Player('player', {
-                // streams[currentStreamIndex.current].active = true;
                 videoId: streams[currentStreamIndex.current]?.extractedId,
                 events: {
                     'onStateChange': onPlayerStateChange
                 }
             });
-            // streams[currentStreamIndex.current].active = true;
         };
     }, []);
 
