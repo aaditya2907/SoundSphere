@@ -32,7 +32,7 @@ export default function UpnextStreams({ streams, setStreams }: Props) {
         <div className="bg-white p-8 rounded shadow-md w-full max-w-4xl">
             <h1 className="text-2xl font-bold mb-6 text-center">Upnext Streams</h1>
             <ul>
-                {streams.map((stream: any) => (
+                {streams.map((stream: Stream) => (
 
                     <li key={stream.id} className="mb-4" >
                         <div className="bg-gray-200 p-4 rounded flex justify-between">

@@ -21,7 +21,7 @@ const handler = NextAuth({
 
                 if (!existingUser) {
                     // If user doesn't exist, create user and add default streams
-                    const newUser = await prisma?.user.create({
+                    await prisma?.user.create({
                         data: {
                             email: params.user.email,
                             Stream: {
@@ -38,17 +38,6 @@ const handler = NextAuth({
             return true
         },
 
-        // async jwt({ token, account }) {
-        //     if (account) {
-        //         token.sub = account.providerAccountId; // Store Google User ID in JWT
-        //     }
-        //     return token;
-        // },
-
-        // async session({ session, token, user }: { session: any, token: any, user: any }) {
-        //     session.user.id = token.sub;
-        //     return session;
-        // }
     }
 })
 

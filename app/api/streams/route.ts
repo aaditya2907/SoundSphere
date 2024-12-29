@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { RateLimiterMemory } from "rate-limiter-flexible";
 import { z } from "zod"
-//@ts-ignore
+//@ts-expect-error
 import youtubeUrl from "youtube-url";
-//@ts-ignore
+//@ts-expect-error
 import youtubesearchapi from "youtube-search-api"
 import prisma from "@/app/lib/db";
-import { google } from "googleapis"
 
 
 const CreateStreamSchema = z.object({
