@@ -38,7 +38,7 @@ export default function UpnextStreams({ streams, setStreams }: Props) {
                     <li key={stream.id} className="mb-4" >
                         <div className="bg-gray-200 p-4 rounded flex justify-between">
                             <div>
-                                <Image src={stream.smallImg} alt={stream.title} className="" />
+                                <Image width={200} height={75} src={stream.smallImg} alt={stream.title} className="object-cover rounded" />
                             </div>
                             <div className="mx-3">
                                 <h2 className="mx-0 text-xl font-bold">
