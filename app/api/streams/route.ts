@@ -49,13 +49,13 @@ export async function POST(req: NextRequest) {
         //Fetching video metadata
         const YtAPIres = await youtubesearchapi.GetVideoDetails(extractedId);
         console.log(YtAPIres)
-        if (!YtAPIres || !YtAPIres.thumbnail || !YtAPIres.title) {
-            return NextResponse.json({
-                message: "Failed to fetch video details"
-            }, {
-                status: 400
-            });
-        }
+        // if (!YtAPIres || !YtAPIres.thumbnail || !YtAPIres.title) {
+        //     return NextResponse.json({
+        //         message: "Failed to fetch video details"
+        //     }, {
+        //         status: 400
+        //     });
+        // }
         const thumbnails = YtAPIres.thumbnail.thumbnails;
         const title: string = JSON.stringify(YtAPIres.title)
         console.log(title)
