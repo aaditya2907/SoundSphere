@@ -6,7 +6,6 @@ import youtubeUrl from "youtube-url";
 //@ts-expect-error Missing type definitions for this module
 import youtubesearchapi from "youtube-search-api"
 import prisma from "@/app/lib/db";
-import error_thumbnail from "@/app/assets/error_thumbnail.png"
 
 const CreateStreamSchema = z.object({
     email: z.string(),
