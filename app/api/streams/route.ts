@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
         //         status: 400
         //     });
         // }
-        const thumbnails = YtAPIres.thumbnail.thumbnails;
+        const thumbnails = YtAPIres.thumbnail?.thumbnails ?? "https://pbs.twimg.com/profile_images/1619097985316708354/zzxCaMnQ_400x400.jpg";
         const title: string = JSON.stringify(YtAPIres.title)
         console.log(title)
         thumbnails.sort((a: { width: number }, b: { width: number }) => a.width < b.width ? -1 : 1)
