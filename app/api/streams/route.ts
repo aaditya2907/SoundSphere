@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { RateLimiterMemory } from "rate-limiter-flexible";
 import { z } from "zod"
-//@ts-expect-error Missing type definitions for this module
 import youtubeUrl from "youtube-url";
-//@ts-expect-error Missing type definitions for this module
 import youtubesearchapi from "youtube-search-api"
 import prisma from "@/app/lib/db";
 

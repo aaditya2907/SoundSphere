@@ -3,7 +3,6 @@ import { useEffect, useRef } from "react";
 declare global {
     interface Window {
         onYouTubeIframeAPIReady: () => void;
-        //@ts-expect-error Missing type definitions for this module
         YT;
     }
 }
