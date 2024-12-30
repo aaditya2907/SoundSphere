@@ -16,6 +16,12 @@ const rateLimiter = new RateLimiterMemory({
     duration: 60,
 });
 
+interface Thumbnail {
+    url: string;
+    width: number;
+    height: number;
+}
+
 export async function POST(req: NextRequest) {
     const ip = req.headers.get('x-forwarded-for') as string | undefined ?? '127.0.0.1';
 
@@ -56,12 +62,17 @@ export async function POST(req: NextRequest) {
             });
         }
         const title: string = JSON.stringify(YtAPIres.title)
-        let thumbnails = [];
+        let thumbnails: Thumbnail[] = [];
         if (YtAPIres.thumbnail) {
+            console.log(YtAPIres.thumbnail)
             thumbnails = YtAPIres.thumbnail.thumbnails;
             thumbnails.sort((a: { width: number }, b: { width: number }) => a.width < b.width ? -1 : 1)
         } else {
-            thumbnails = ["https://pbs.twimg.com/profile_images/1619097985316708354/zzxCaMnQ_400x400.jpg"];
+            thumbnails = [{
+                url: "https://pbs.twimg.com/profile_images/1619097985316708354/zzxCaMnQ_400x400.jpg",
+                width: 200,
+                height: 100
+            }];
         }
 
         const user = await prisma.user.findFirst({
