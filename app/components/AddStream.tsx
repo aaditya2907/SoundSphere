@@ -46,32 +46,39 @@ export default function AddStream({ setStreams }: Props) {
         fetchStreams(); // Refresh the streams list after submission
     };
 
-    return <div>
-        <div className="bg-white p-8 rounded shadow-md w-full max-w-md mb-8">
-            <h1 className="text-2xl font-bold mb-6 text-center">Add Song</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                    <label htmlFor="url" className="block text-gray-700">Song URL</label>
+    return <div className="min-w-full border-2 border-black p-8 rounded shadow-md mt-2">
+        <h1 className="text-2xl font-bold mb-6 text-center">Add Song</h1>
+        <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+                {/* <div className="flex justify-center mb-2">
+                    <label htmlFor="url" className="text-gray-700">Song URL</label>
+                </div> */}
+                <div className="flex justify-center">
                     <input
                         type="text"
                         id="url"
-
+                        placeholder="Song URL"
                         onChange={(e) => setUrl(e.target.value)}
-                        className="w-full px-3 py-2 border rounded"
+                        className="w-3/5 px-3 py-2 border rounded"
 
                     />
                 </div>
+
+            </div>
+            <div className="flex justify-center">
                 <button
                     type="submit"
-                    className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+                    className="w-3/5 bg-gray-600 text-white py-2 rounded hover:bg-gray-700"
                     onClick={() => {
                         (document.getElementById('url') as HTMLInputElement).value = '';
                     }}
                 >
                     Add
                 </button>
-            </form>
-            {message && <p className="mt-4 text-center text-gray-700">{message}</p>}
-        </div>
+            </div>
+
+        </form>
+        {message && <p className="mt-4 text-center text-gray-700">{message}</p>}
     </div>
+
 }

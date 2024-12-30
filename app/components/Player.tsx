@@ -1,4 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import playNext from "../assets/playNext.svg"
+import playPrev from "../assets/playPrev.svg"
+import play from "../assets/play.svg"
+import pause from "../assets/pause.svg"
 
 declare global {
     interface Window {
@@ -26,6 +31,8 @@ export default function Player({ streams }: Props) {
     //@ts-expect-error Missing type definitions for this module
     const playerRef = useRef<YT.Player | null>(null);
     const currentStreamIndex = useRef(0);
+    const [isPlayingState, setIsPlayingState] = useState(false);
+    const isPlaying = useRef(false);
 
     useEffect(() => {
         // Load the YouTube IFrame Player API once 
@@ -40,17 +47,25 @@ export default function Player({ streams }: Props) {
                 videoId: streams[currentStreamIndex.current]?.extractedId,
                 events: {
                     'onStateChange': onPlayerStateChange
+                },
+                playerVars: {
+                    controls: 0,        // Hide controls
+                    disablekb: 1,      // Disable keyboard controls
+                    modestbranding: 1, // Hide YouTube logo
+                    rel: 0,            // Hide related videos
+                    showinfo: 0,       // Hide video title
+                    iv_load_policy: 3  // Hide video annotations
                 }
             });
         };
     }, []);
 
-    useEffect(() => {
-        if (playerRef.current && streams.length > 0) {
-            // Update the video when the streams array changes
-            playerRef.current.loadVideoById(streams[currentStreamIndex.current].extractedId);
-        }
-    }, [streams]);
+    // useEffect(() => {
+    //     if (playerRef.current && streams.length > 0) {
+    //         // Update the video when the streams array changes
+    //         playerRef.current.loadVideoById(streams[currentStreamIndex.current].extractedId);
+    //     }
+    // }, [streams]);
 
     //@ts-expect-error Missing type definitions for this module
     const onPlayerStateChange = (event: YT.OnStateChangeEvent) => {
@@ -72,11 +87,56 @@ export default function Player({ streams }: Props) {
             playerRef.current.loadVideoById(streams[currentStreamIndex.current].extractedId);
         }
     }
+    function playHandler() {
+        if (!playerRef.current) return;
+
+        if (isPlaying.current) {
+            playerRef.current.pauseVideo();
+            isPlaying.current = false;
+            setIsPlayingState(false)
+        } else {
+            playerRef.current.playVideo();
+            isPlaying.current = true;
+            setIsPlayingState(true)
+        }
+    }
     return (
-        <div>
-            <div id="player"></div>
-            <button className="border-gray-500 border-2" onClick={() => prevHandler()}>Play Before</button>
-            <button className="border-gray-500 border-2" onClick={() => nextHandler()}>Play Next</button>
+        <div className="border-2 border-black mb-2">
+            <div className="relative">
+                <div id="player" className="w-full h-96 pointer-events-none" ></div>
+                <div className="absolute inset-0" /> {/* Overlay to prevent interaction */}
+            </div>
+            <div className="my-2 h-10 flex justify-center">
+                <button className="mx-2" onClick={() => prevHandler()}>
+                    <Image
+                        src={playPrev}
+                        alt="Play Next"
+                        width={30} />
+                </button>
+                <button className="w-10" onClick={() => playHandler()}>
+                    <div className="transition-all duration-400 ease-in-out">
+                        {isPlayingState ?
+                            <Image
+                                src={pause}
+                                alt={"Pause"}
+                                width={40}
+                                className="transform scale-100 hover:scale-110"
+                            /> :
+                            <Image
+                                src={play}
+                                alt={"Play"}
+                                width={30}
+                                className="transform scale-100 hover:scale-110 translate-x-1"
+                            />}
+                    </div>
+                </button>
+                <button className="mx-2" onClick={() => nextHandler()}>
+                    <Image
+                        src={playNext}
+                        alt="Play Next"
+                        width={30} />
+                </button>
+            </div>
         </div>
     );
 }

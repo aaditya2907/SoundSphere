@@ -6,7 +6,7 @@ import youtubeUrl from "youtube-url";
 //@ts-expect-error Missing type definitions for this module
 import youtubesearchapi from "youtube-search-api"
 import prisma from "@/app/lib/db";
-
+import error_thumbnail from "@/app/assets/error_thumbnail.png"
 
 const CreateStreamSchema = z.object({
     email: z.string(),
@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
             thumbnails.sort((a: { width: number }, b: { width: number }) => a.width < b.width ? -1 : 1)
         } else {
             thumbnails = [{
-                url: "https://pbs.twimg.com/profile_images/1619097985316708354/zzxCaMnQ_400x400.jpg",
+                url: "",
                 width: 200,
                 height: 100
             }];
@@ -89,8 +89,8 @@ export async function POST(req: NextRequest) {
                 url: data.url,
                 extractedId,
                 title: title ?? "Title",
-                smallImg: (thumbnails.length > 1 ? thumbnails[thumbnails.length - 2].url : thumbnails[thumbnails.length - 1].url) ?? "https://pbs.twimg.com/profile_images/1619097985316708354/zzxCaMnQ_400x400.jpg",
-                bigImg: thumbnails[thumbnails.length - 1].url ?? "https://pbs.twimg.com/profile_images/1619097985316708354/zzxCaMnQ_400x400.jpg"
+                smallImg: (thumbnails.length > 1 ? thumbnails[thumbnails.length - 2].url : thumbnails[thumbnails.length - 1].url) ?? "",
+                bigImg: thumbnails[thumbnails.length - 1].url ?? ""
             }
         })
         return NextResponse.json({
