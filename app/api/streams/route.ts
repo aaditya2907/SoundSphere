@@ -48,6 +48,7 @@ export async function POST(req: NextRequest) {
 
         //Fetching video metadata
         const YtAPIres = await youtubesearchapi.GetVideoDetails(extractedId);
+        console.log(YtAPIres)
         if (!YtAPIres || !YtAPIres.thumbnail || !YtAPIres.title) {
             return NextResponse.json({
                 message: "Failed to fetch video details"
