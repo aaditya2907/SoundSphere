@@ -38,8 +38,8 @@ export default function Home() {
   }, [fetchStreams]);
 
   return (
-    <div className='bg-violet-300'>
-      <div className='flex justify-between pt-3 mx-4'>
+    <div className='bg-violet-300 min-h-[calc(100vh-90px)]'> 
+      <div className='flex justify-between py-3 mx-4'>
 
         <div className='w-3/4 flex flex-col justify-start mr-4'>
           <div>
@@ -50,7 +50,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+        <div className="bg-gray-100 flex flex-col items-center justify-start">
           {streams.length > 0 && <UpnextStreams streams={streams} setStreams={setStreams} />}
         </div>
 

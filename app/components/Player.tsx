@@ -101,7 +101,7 @@ export default function Player({ streams }: Props) {
         }
     }
     return (
-        <div className="border-2 border-black mb-2">
+        <div className="border-2 border-black mb-2 bg-violet-400">
             <div className="relative">
                 <div id="player" className="w-full h-96 pointer-events-none" ></div>
                 <div className="absolute inset-0" /> {/* Overlay to prevent interaction */}

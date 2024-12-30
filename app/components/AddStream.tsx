@@ -46,8 +46,8 @@ export default function AddStream({ setStreams }: Props) {
         fetchStreams(); // Refresh the streams list after submission
     };
 
-    return <div className="min-w-full border-2 border-black p-8 rounded shadow-md mt-2">
-        <h1 className="text-2xl font-bold mb-6 text-center">Add Song</h1>
+    return <div className="min-w-full border-2 border-black p-8 rounded shadow-md mt-1">
+        <h1 className="text-2xl font-bold mb-4 text-center">Add Song</h1>
         <form onSubmit={handleSubmit}>
             <div className="mb-4">
                 {/* <div className="flex justify-center mb-2">
@@ -57,7 +57,7 @@ export default function AddStream({ setStreams }: Props) {
                     <input
                         type="text"
                         id="url"
-                        placeholder="Song URL"
+                        placeholder="Enter Youtube Song URL"
                         onChange={(e) => setUrl(e.target.value)}
                         className="w-3/5 px-3 py-2 border rounded"
 

@@ -5,7 +5,7 @@ import logo from '../assets/logo.png'
 
 export default function Appbar() {
     const session = useSession();
-    return <div className="flex justify-between mx-2 mt-2">
+    return <div className="flex justify-between mx-2">
         <div className="flex">
             <Image
                 src={logo}

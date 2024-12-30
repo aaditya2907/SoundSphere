@@ -1,4 +1,5 @@
 import Image from "next/image";
+import deleteIcon from "../assets/delete.svg"
 
 interface Stream {
     id: string;
@@ -28,31 +29,36 @@ export default function UpnextStreams({ streams, setStreams }: Props) {
         setStreams((prevStreams: Stream[]) => prevStreams.filter(stream => stream.id !== id))
 
     }
-    return <div>
-        <div className="bg-white p-8 rounded shadow-md w-full max-w-4xl">
-            <h1 className="text-2xl font-bold mb-6 text-center">Upnext Streams</h1>
-            <ul>
-                {streams.map((stream: Stream) => (
+    return <div className="bg-white py-4 px-4 rounded shadow-md w-full max-w-4xl  border-2 border-black">
+        <h1 className="text-2xl font-bold mb-4 text-center sticky top-0 bg-white">Upnext Streams</h1>
+        <ul className="max-h-[calc(100vh-200px)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+            {streams.map((stream: Stream) => (
 
-                    <li key={stream.id} className="mb-4" >
-                        <div className="bg-gray-200 p-4 rounded flex justify-between">
-                            <div>
-                                <Image width={200} height={75} src={stream.smallImg} alt={stream.title} className="object-cover rounded" />
+                <li key={stream.id} className="mb-4" >
+                    <div className="bg-gray-200 p-4 rounded flex justify-between w-full ">
+                        <div className="flex justify-start ">
+                            <div className="min-w-fit">
+                                <Image width={180} height={175} src={stream.smallImg} alt={stream.title} className="object-cover rounded" />
                             </div>
-                            <div className="mx-3">
-                                <h2 className="mx-0 text-xl font-bold">
-                                    <a href={stream.url} target='_blank'>{stream.title}</a>
+                            <div className="mx-4 flex flex-col items-start justify-start ">
+                                <h2 className="text-xl font-bold">
+                                    <a href={stream.url} target='_blank'>{stream.title.substring(1, 55)}...</a>
                                 </h2>
                                 {stream.active && <p>Active</p>}
-                                <button onClick={() => {
-                                    deleteStream(stream.id)
-
-                                }} className="border-2 border-black rounded-md px-1 my-2">delete</button>
                             </div>
                         </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    </div >
+
+                        <div className="min-w-10">
+                            <button onClick={() => {
+                                deleteStream(stream.id)
+
+                            }} className="rounded-md my-2 bg-zinc-300 hover:bg-zinc-400 p-2">{<Image
+                                width={20} height={175} src={deleteIcon} alt={stream.title} className="object-cover rounded"
+                            />}</button>
+                        </div>
+                    </div>
+                </li>
+            ))}
+        </ul>
+    </div>
 }
