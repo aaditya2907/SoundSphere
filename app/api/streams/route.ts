@@ -48,18 +48,21 @@ export async function POST(req: NextRequest) {
 
         //Fetching video metadata
         const YtAPIres = await youtubesearchapi.GetVideoDetails(extractedId);
-        console.log(YtAPIres)
-        // if (!YtAPIres || !YtAPIres.thumbnail || !YtAPIres.title) {
-        //     return NextResponse.json({
-        //         message: "Failed to fetch video details"
-        //     }, {
-        //         status: 400
-        //     });
-        // }
-        const thumbnails = YtAPIres.thumbnail?.thumbnails ?? "https://pbs.twimg.com/profile_images/1619097985316708354/zzxCaMnQ_400x400.jpg";
+        if (!YtAPIres) {
+            return NextResponse.json({
+                message: "Failed to fetch video details"
+            }, {
+                status: 400
+            });
+        }
         const title: string = JSON.stringify(YtAPIres.title)
-        console.log(title)
-        thumbnails.sort((a: { width: number }, b: { width: number }) => a.width < b.width ? -1 : 1)
+        let thumbnails = [];
+        if (YtAPIres.thumbnail) {
+            thumbnails = YtAPIres.thumbnail.thumbnails;
+            thumbnails.sort((a: { width: number }, b: { width: number }) => a.width < b.width ? -1 : 1)
+        } else {
+            thumbnails = ["https://pbs.twimg.com/profile_images/1619097985316708354/zzxCaMnQ_400x400.jpg"];
+        }
 
         const user = await prisma.user.findFirst({
             where: {
