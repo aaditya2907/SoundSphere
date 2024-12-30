@@ -45,13 +45,21 @@ export async function POST(req: NextRequest) {
                 status: 411
             })
         }
-                                        
+
         const extractedId = youtubeUrl.extractId(data.url)
 
         //Fetching video metadata
         const YtAPIres = await youtubesearchapi.GetVideoDetails(extractedId);
+        if (!YtAPIres || !YtAPIres.thumbnail || !YtAPIres.title) {
+            return NextResponse.json({
+                message: "Failed to fetch video details"
+            }, {
+                status: 400
+            });
+        }
         const thumbnails = YtAPIres.thumbnail.thumbnails;
         const title: string = JSON.stringify(YtAPIres.title)
+        console.log(title)
         thumbnails.sort((a: { width: number }, b: { width: number }) => a.width < b.width ? -1 : 1)
 
         const user = await prisma.user.findFirst({
