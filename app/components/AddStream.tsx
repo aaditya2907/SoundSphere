@@ -1,5 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
+import ShowError from "./ShowError";
 
 interface Stream {
     id: string;
@@ -11,12 +12,14 @@ interface Stream {
 }
 
 interface Props {
+    message: string,
+    setMessage: (message: string) => void
     setStreams: (streams: Stream[]) => void
 }
 
-export default function AddStream({ setStreams }: Props) {
+export default function AddStream({ message, setMessage, setStreams }: Props) {
     const [url, setUrl] = useState('');
-    const [message, setMessage] = useState('');
+    // const [message, setMessage] = useState('');
     const session = useSession();
     const email = session.data?.user?.email ?? ""
 
@@ -46,7 +49,7 @@ export default function AddStream({ setStreams }: Props) {
         fetchStreams(); // Refresh the streams list after submission
     };
 
-    return <div className="min-w-full border-2 border-black p-8 rounded shadow-md mt-1">
+    return <div className="min-w-full pt-5 pb-8 rounded shadow-md mt-3 bg-violet-400">
         <h1 className="text-2xl font-bold mb-4 text-center">Add Song</h1>
         <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -78,7 +81,10 @@ export default function AddStream({ setStreams }: Props) {
             </div>
 
         </form>
-        {message && <p className="mt-4 text-center text-gray-700">{message}</p>}
+
+        {/* <div>
+            {message && <ShowError message={message} setMessage={setMessage} />}
+        </div> */}
     </div>
 
 }

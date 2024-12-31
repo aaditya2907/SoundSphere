@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import Player from './components/Player';
 import AddStream from './components/AddStream';
 import UpnextStreams from './components/UpNextStreams';
+import ShowError from './components/ShowError';
 
 interface Stream {
   id: string;
@@ -17,6 +18,7 @@ interface Stream {
 export default function Home() {
 
   const [streams, setStreams] = useState<Stream[]>([]);
+  const [message, setMessage] = useState('');
 
   const session = useSession()
   const email = session?.data?.user?.email ?? ""
@@ -38,7 +40,7 @@ export default function Home() {
   }, [fetchStreams]);
 
   return (
-    <div className='bg-violet-300 min-h-[calc(100vh-90px)]'> 
+    <div className='bg-violet-200 min-h-[calc(100vh-90px)]'>
       <div className='flex justify-between py-3 mx-4'>
 
         <div className='w-3/4 flex flex-col justify-start mr-4'>
@@ -46,14 +48,14 @@ export default function Home() {
             {streams.length > 0 && <Player streams={streams} />}
           </div>
           <div>
-            <AddStream setStreams={setStreams} />
+            <AddStream message={message} setMessage={setMessage} setStreams={setStreams} />
           </div>
         </div>
 
         <div className="bg-gray-100 flex flex-col items-center justify-start">
-          {streams.length > 0 && <UpnextStreams streams={streams} setStreams={setStreams} />}
+          {streams.length > 0 && <UpnextStreams message={message} setMessage={setMessage} streams={streams} setStreams={setStreams} />}
         </div>
-
+        {message && <ShowError message={message} setMessage={setMessage} />}
       </div>
     </div >
   );

@@ -98,12 +98,13 @@ export async function POST(req: NextRequest) {
             status: 201
         })
 
-    } catch (e) {
+    } catch (error: any) {
         return NextResponse.json({
-            message: "Error while adding Stream " + e
+            message: error.issues[0].code
         }, {
             status: 411
-        })
+        });
+
     }
 
 }
@@ -146,7 +147,7 @@ export async function DELETE(req: NextRequest) {
         })
     } catch (e) {
         return NextResponse.json({
-            message: "Error while deleting Stream " + e
+            message: e
         }, {
             status: 500
         })
