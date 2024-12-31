@@ -1,6 +1,5 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import ShowError from "./ShowError";
 
 interface Stream {
     id: string;
