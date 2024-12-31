@@ -6,6 +6,7 @@ import youtubeUrl from "youtube-url";
 //@ts-expect-error Missing type definitions for this module
 import youtubesearchapi from "youtube-search-api"
 import prisma from "@/app/lib/db";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 const CreateStreamSchema = z.object({
     email: z.string(),
@@ -105,9 +106,19 @@ export async function POST(req: NextRequest) {
             }, {
                 status: 411
             });
-        } else {
+        } else if (error instanceof PrismaClientKnownRequestError) {
+            if (error.code === 'P2002') {
+                return NextResponse.json({
+                    message: "Stream already exists!"
+                }, {
+                    status: 409
+                })
+            }
+
+        }
+        else {
             return NextResponse.json({
-                message: "An unexpected error occurred"
+                message: error
             }, {
                 status: 500
             });

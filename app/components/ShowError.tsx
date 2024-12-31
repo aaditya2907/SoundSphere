@@ -23,6 +23,9 @@ export default function ShowError({ message, setMessage }: Props) {
             showMessage = "Stream Deleted Successfully!";
             break;
         }
+        case ("Stream already exists!"):
+            showMessage = "Stream already exists!";
+            break;
         default:
             showMessage = "Error!"
             break;
