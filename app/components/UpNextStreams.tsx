@@ -12,7 +12,6 @@ interface Stream {
 
 
 interface Props {
-    message: string,
     setMessage: (message: string) => void,
     streams: Stream[],
     setStreams: (streams: Stream[] | ((prevStreams: Stream[]) => Stream[])) => void
@@ -20,7 +19,7 @@ interface Props {
 
 
 
-export default function UpnextStreams({ message, setMessage, streams, setStreams }: Props) {
+export default function UpnextStreams({setMessage, streams, setStreams }: Props) {
     async function deleteStream(id: string) {
         const res = await fetch(`api/streams?id=${id}`, {
             method: 'DELETE',

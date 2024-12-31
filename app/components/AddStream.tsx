@@ -12,12 +12,11 @@ interface Stream {
 }
 
 interface Props {
-    message: string,
     setMessage: (message: string) => void
     setStreams: (streams: Stream[]) => void
 }
 
-export default function AddStream({ message, setMessage, setStreams }: Props) {
+export default function AddStream({ setMessage, setStreams }: Props) {
     const [url, setUrl] = useState('');
     // const [message, setMessage] = useState('');
     const session = useSession();

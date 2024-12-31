@@ -48,12 +48,12 @@ export default function Home() {
             {streams.length > 0 && <Player streams={streams} />}
           </div>
           <div>
-            <AddStream message={message} setMessage={setMessage} setStreams={setStreams} />
+            <AddStream setMessage={setMessage} setStreams={setStreams} />
           </div>
         </div>
 
         <div className="bg-gray-100 flex flex-col items-center justify-start">
-          {streams.length > 0 && <UpnextStreams message={message} setMessage={setMessage} streams={streams} setStreams={setStreams} />}
+          {streams.length > 0 && <UpnextStreams setMessage={setMessage} streams={streams} setStreams={setStreams} />}
         </div>
         {message && <ShowError message={message} setMessage={setMessage} />}
       </div>

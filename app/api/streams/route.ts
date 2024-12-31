@@ -98,12 +98,20 @@ export async function POST(req: NextRequest) {
             status: 201
         })
 
-    } catch (error: any) {
-        return NextResponse.json({
-            message: error.issues[0].code
-        }, {
-            status: 411
-        });
+    } catch (error) {
+        if (error instanceof z.ZodError) {
+            return NextResponse.json({
+                message: error.issues[0].code
+            }, {
+                status: 411
+            });
+        } else {
+            return NextResponse.json({
+                message: "An unexpected error occurred"
+            }, {
+                status: 500
+            });
+        }
 
     }
 
