@@ -13,7 +13,7 @@ interface Stream {
 interface Props {
     setMessage: (message: string) => void
     setStreams: (streams: Stream[]) => void
-    
+
 }
 
 export default function AddStream({ setMessage, setStreams }: Props) {
@@ -48,42 +48,30 @@ export default function AddStream({ setMessage, setStreams }: Props) {
         fetchStreams(); // Refresh the streams list after submission
     };
 
-    return <div className="min-w-full pt-5 pb-8 rounded shadow-md mt-3 bg-violet-400">
-        <h1 className="text-2xl font-bold mb-4 text-center">Add Song</h1>
-        <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-                {/* <div className="flex justify-center mb-2">
-                    <label htmlFor="url" className="text-gray-700">Song URL</label>
-                </div> */}
-                <div className="flex justify-center">
-                    <input
-                        type="text"
-                        id="url"
-                        placeholder="Enter Youtube Song URL"
-                        onChange={(e) => setUrl(e.target.value)}
-                        className="w-3/5 px-3 py-2 border rounded"
-
-                    />
+    return (
+        <div className="w-full pt-4 pb-6 rounded shadow-md mt-3 bg-violet-400 px-4">
+            <h1 className="text-xl md:text-2xl font-bold mb-4 text-center">Add Song</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                    <div className="flex justify-center">
+                        <input
+                            type="text"
+                            id="url"
+                            placeholder="Enter Youtube Song URL"
+                            onChange={(e) => setUrl(e.target.value)}
+                            className="w-full md:w-3/5 px-3 py-2 border rounded"
+                        />
+                    </div>
                 </div>
-
-            </div>
-            <div className="flex justify-center">
-                <button
-                    type="submit"
-                    className="w-3/5 bg-gray-600 text-white py-2 rounded hover:bg-gray-700"
-                    onClick={() => {
-                        (document.getElementById('url') as HTMLInputElement).value = '';
-                    }}
-                >
-                    Add
-                </button>
-            </div>
-
-        </form>
-
-        {/* <div>
-            {message && <ShowError message={message} setMessage={setMessage} />}
-        </div> */}
-    </div>
-
+                <div className="flex justify-center">
+                    <button
+                        type="submit"
+                        className="w-full md:w-3/5 bg-gray-600 text-white py-2 rounded hover:bg-gray-700"
+                    >
+                        Add
+                    </button>
+                </div>
+            </form>
+        </div>
+    )
 }

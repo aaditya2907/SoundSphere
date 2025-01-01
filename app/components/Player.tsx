@@ -105,7 +105,7 @@ export default function Player({ streams }: Props) {
     return (
         <div className="mb-2 bg-violet-400 rounded-md shadow-md">
             <div className="relative">
-                <div id="player" className="w-full h-96 pointer-events-none" ></div>
+                <div id="player" className="w-full h-48 md:h-72 lg:h-96 pointer-events-none" ></div>
                 <div className="absolute inset-0" /> {/* Overlay to prevent interaction */}
             </div>
             <div className="my-2 h-10 flex justify-center">
@@ -137,8 +137,8 @@ export default function Player({ streams }: Props) {
                     <Image
                         src={playNext}
                         alt="Play Next"
-                        width={30} 
-                        className="transform scale-100 hover:scale-110"/>
+                        width={30}
+                        className="transform scale-100 hover:scale-110" />
                 </button>
             </div>
         </div>

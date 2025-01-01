@@ -33,7 +33,8 @@ export default function UpnextStreams({setMessage, streams, setStreams }: Props)
         setStreams((prevStreams: Stream[]) => prevStreams.filter(stream => stream.id !== id))
 
     }
-    return <div className="bg-white py-4 px-4 rounded-md shadow-md w-full max-w-4xl ">
+    return (
+    <div className="bg-white py-4 px-4 rounded-md shadow-md w-full max-w-4xl ">
         <h1 className="text-2xl font-bold mb-4 text-center sticky top-0 bg-white">Upnext Streams</h1>
         <ul className="max-h-[calc(100vh-200px)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
             {streams.map((stream: Stream) => (
@@ -65,4 +66,5 @@ export default function UpnextStreams({setMessage, streams, setStreams }: Props)
             ))}
         </ul>
     </div>
+    )
 }

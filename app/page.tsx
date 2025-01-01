@@ -57,24 +57,17 @@ export default function Home() {
   }
 
   return (
-
     <div className='bg-violet-200 min-h-[calc(100vh-90px)]' suppressHydrationWarning>
-      <div className='flex justify-between py-3 mx-4'>
-
-        <div className='w-3/4 flex flex-col justify-start mr-4'>
-          <div>
-            {streams.length > 0 && <Player streams={streams} />}
-          </div>
-          <div>
-            <AddStream setMessage={setMessage} setStreams={setStreams} />
-          </div>
+      <div className='flex flex-col lg:flex-row px-4 py-3 gap-4'>
+        <div className='w-full lg:w-3/5'>
+          {streams.length > 0 && <Player streams={streams} />}
+          <AddStream setMessage={setMessage} setStreams={setStreams} />
         </div>
-
-        <div className="bg-gray-100 flex flex-col items-center justify-start">
+        <div className="w-full lg:w-2/5">
           {streams.length > 0 && <UpnextStreams setMessage={setMessage} streams={streams} setStreams={setStreams} />}
         </div>
         {message && <ShowError message={message} setMessage={setMessage} />}
       </div>
-    </div >
+    </div>
   );
 }
