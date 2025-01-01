@@ -13,6 +13,7 @@ interface Stream {
 interface Props {
     setMessage: (message: string) => void
     setStreams: (streams: Stream[]) => void
+    
 }
 
 export default function AddStream({ setMessage, setStreams }: Props) {

@@ -1,10 +1,14 @@
 "use client"
 import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
-import Player from './components/Player';
-import AddStream from './components/AddStream';
-import UpnextStreams from './components/UpNextStreams';
-import ShowError from './components/ShowError';
+import { useRouter } from 'next/navigation';
+import SessionLoader from './components/SessionLoader';
+import dynamic from "next/dynamic"
+
+const Player = dynamic(() => import('./components/Player'))
+const AddStream = dynamic(() => import('./components/AddStream'))
+const UpnextStreams = dynamic(() => import('./components/UpNextStreams'))
+const ShowError = dynamic(() => import('./components/ShowError'))
 
 interface Stream {
   id: string;
@@ -16,12 +20,19 @@ interface Stream {
 }
 
 export default function Home() {
-
-  const [streams, setStreams] = useState<Stream[]>([]);
   const [message, setMessage] = useState('');
+  const [streams, setStreams] = useState<Stream[]>([]);
 
   const session = useSession()
-  const email = session?.data?.user?.email ?? ""
+  const router = useRouter();
+
+  const email = session?.data?.user?.email ?? "";
+
+  useEffect(() => {
+    if (session.status === "unauthenticated") {
+      router.push("/signin")
+    }
+  }, [session.status, router])
 
   const fetchStreams = useCallback(async () => {
 
@@ -39,8 +50,15 @@ export default function Home() {
     fetchStreams();
   }, [fetchStreams]);
 
+  if (session.status === "loading") {
+    return <div>
+      <SessionLoader />
+    </div>
+  }
+
   return (
-    <div className='bg-violet-200 min-h-[calc(100vh-90px)]'>
+
+    <div className='bg-violet-200 min-h-[calc(100vh-90px)]' suppressHydrationWarning>
       <div className='flex justify-between py-3 mx-4'>
 
         <div className='w-3/4 flex flex-col justify-start mr-4'>

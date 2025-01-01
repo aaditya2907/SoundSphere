@@ -23,8 +23,8 @@ model Stream {
   id          String  @id @default(uuid())
   url         String
   title       String  @default("")
-  smallImg    String  @default("https://pbs.twimg.com/profile_images/1619097985316708354/zzxCaMnQ_400x400.jpg")
-  bigImg      String  @default("https://pbs.twimg.com/profile_images/1619097985316708354/zzxCaMnQ_400x400.jpg")
+  smallImg    String  @default("")
+  bigImg      String  @default("")
   extractedId String
   active      Boolean @default(false)
   userId      String

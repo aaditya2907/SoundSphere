@@ -34,6 +34,7 @@ export default function Player({ streams }: Props) {
     const [isPlayingState, setIsPlayingState] = useState(false);
     const isPlaying = useRef(false);
 
+
     useEffect(() => {
         // Load the YouTube IFrame Player API once 
         const tag = document.createElement('script');
@@ -68,6 +69,7 @@ export default function Player({ streams }: Props) {
     // }, [streams]);
 
     //@ts-expect-error Missing type definitions for this module
+
     const onPlayerStateChange = (event: YT.OnStateChangeEvent) => {
         if ((event.data === window.YT.PlayerState.ENDED) && (currentStreamIndex.current != streams.length - 1)) {
             // Play the next video when the current video ends
@@ -111,7 +113,8 @@ export default function Player({ streams }: Props) {
                     <Image
                         src={playPrev}
                         alt="Play Next"
-                        width={30} />
+                        width={30}
+                        className="transform scale-100 hover:scale-110" />
                 </button>
                 <button className="w-10" onClick={() => playHandler()}>
                     <div className="transition-all duration-400 ease-in-out">
@@ -134,7 +137,8 @@ export default function Player({ streams }: Props) {
                     <Image
                         src={playNext}
                         alt="Play Next"
-                        width={30} />
+                        width={30} 
+                        className="transform scale-100 hover:scale-110"/>
                 </button>
             </div>
         </div>

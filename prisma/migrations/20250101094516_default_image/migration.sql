@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Stream" ALTER COLUMN "smallImg" SET DEFAULT '',
+ALTER COLUMN "bigImg" SET DEFAULT '';
