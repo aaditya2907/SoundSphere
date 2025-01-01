@@ -11,7 +11,7 @@ export default function Appbar() {
         router.push('/')
     }
     return (
-        <div className="flex justify-between items-center px-4 py-2">
+        <div className="sticky top-0 z-50 bg-white flex justify-between items-center px-4 py-2">
             <div className="flex">
                 <button onClick={logoHandler}>
                     <Image
